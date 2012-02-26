@@ -1,0 +1,14 @@
+Unit tests rely on the Android unit testing framework, which itself is an extension of JUnit. To run the tests from Eclipse, right click the test project and select Run as > Android JUnit Test and select a running emulator or attached device.
+
+Some functionality still relies on manual testing
+
+-To test that the application creates an account:
+	1. Run the application, and press the "Register" button
+	2. In the new view, enter a valid email address
+	2a.Enter a password, and a matching password into the confirm field
+	3. Press the "Create Account" button
+	4. Check the "/admin/users/" page on the running server, to manually 
+		check for the existence of the username just created.
+	
+	This tests that the client application and the server successfully 
+	communicate, and would be hard to do with an automated test.
