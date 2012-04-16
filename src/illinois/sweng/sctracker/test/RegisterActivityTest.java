@@ -1,6 +1,5 @@
 package illinois.sweng.sctracker.test;
 
-import illinois.sweng.sctracker.DelegateActivity;
 import illinois.sweng.sctracker.RegisterActivity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.KeyEvent;
@@ -8,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class RegisterActivityTest extends ActivityInstrumentationTestCase2<RegisterActivity> {
-	private DelegateActivity mActivity;
+	private RegisterActivity mActivity;
 	private EditText mEmailField, mPasswordField, mPasswordConfirmField;
 	private Button mCreateAccountButton;
 	
