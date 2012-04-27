@@ -1,6 +1,9 @@
 package illinois.sweng.sctracker.test;
 
+import illinois.sweng.sctracker.R;
 import illinois.sweng.sctracker.RegisterActivity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.KeyEvent;
 import android.widget.Button;
@@ -43,6 +46,14 @@ public class RegisterActivityTest extends ActivityInstrumentationTestCase2<Regis
 	 * and the email field is cleared.
 	 */
 	public void testInvalidEmailAddress() {
+		String prefsFile = mActivity.getResources().getString(R.string.preferencesFilename);
+		String key = mActivity.getResources().getString(R.string.preferencesUserpass);
+		
+		SharedPreferences sharedPreferences = mActivity.getSharedPreferences(prefsFile, RegisterActivity.MODE_PRIVATE);
+		Editor editor = sharedPreferences.edit(); 
+		editor.putString(key, ":");
+		editor.commit();
+		
 		mActivity.runOnUiThread(
 				new Runnable() {
 					public void run() {
@@ -54,7 +65,7 @@ public class RegisterActivityTest extends ActivityInstrumentationTestCase2<Regis
 		
 		this.sendKeys(KeyEvent.KEYCODE_DPAD_CENTER);
 		
-		assertTrue(mEmailField.getText().toString().equals(""));
+		assertEquals(mEmailField.getText().toString(), "");
 		assertFalse(mCreateAccountButton.getText().toString().
 				equals(illinois.sweng.sctracker.R.string.registerNewAccountSuccess));
 	}
@@ -65,6 +76,14 @@ public class RegisterActivityTest extends ActivityInstrumentationTestCase2<Regis
 	 * is maintained.
 	 */
 	public void testInvalidPasswords() {
+		String prefsFile = mActivity.getResources().getString(R.string.preferencesFilename);
+		String key = mActivity.getResources().getString(R.string.preferencesUserpass);
+		
+		SharedPreferences sharedPreferences = mActivity.getSharedPreferences(prefsFile, RegisterActivity.MODE_PRIVATE);
+		Editor editor = sharedPreferences.edit(); 
+		editor.putString(key, ":");
+		editor.commit();
+		
 		final String validEmail = "valid@email.com";
 		mActivity.runOnUiThread(
 				new Runnable() {
@@ -79,9 +98,9 @@ public class RegisterActivityTest extends ActivityInstrumentationTestCase2<Regis
 		
 		this.sendKeys(KeyEvent.KEYCODE_DPAD_CENTER);
 		
-		assertTrue(mEmailField.getText().toString().equals(validEmail));
-		assertTrue(mPasswordField.getText().toString().equals(""));
-		assertTrue(mPasswordConfirmField.getText().toString().equals(""));
+		assertEquals(mEmailField.getText().toString(), validEmail);
+		assertEquals(mPasswordField.getText().toString(), "");
+		assertEquals(mPasswordConfirmField.getText().toString(), "");
 		assertFalse(mCreateAccountButton.getText().toString().
 				equals(illinois.sweng.sctracker.R.string.registerNewAccountSuccess));
 	}

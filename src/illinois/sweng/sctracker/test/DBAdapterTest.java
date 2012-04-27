@@ -78,7 +78,7 @@ public class DBAdapterTest extends
 
 	@Override
 	protected void tearDown() throws Exception {
-		// mDBAdapter.close();
+		 mDBAdapter.close();
 		super.tearDown();
 		// mActivity.deleteDatabase(DATABASE_NAME);
 	}
